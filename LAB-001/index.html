@@ -1,148 +1,238 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>LAB-001 · Estado del caso</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estado del caso | SDA</title>
   <style>
     :root{
-      --bg:#0B1220;
-      --card:#0F1A2F;
-      --card2:#0C1629;
-      --text:#E6ECF5;
-      --muted:#9AA6B2;
-      --line:rgba(255,255,255,.10);
-      --accent:#1ABEFF;
-      --ok:#22C55E;
-      --warn:#F59E0B;
-      --bad:#EF4444;
-      --radius:16px;
+      --bg: #F6F5F2;          /* beige/gris claro */
+      --surface: #FFFFFF;     /* tarjetas */
+      --text: #111827;        /* casi negro */
+      --muted: #6B7280;       /* gris */
+      --border: #E5E7EB;      /* borde suave */
+      --gold: #B08A2B;        /* acento dorado */
+      --radius: 14px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
     }
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(900px 500px at 15% 0%, rgba(26,190,255,.15), transparent 60%),
-                  radial-gradient(900px 500px at 85% 10%, rgba(26,190,138,.12), transparent 55%),
-                  var(--bg);
-      color:var(--text);
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
     }
-    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px;}
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      backdrop-filter: blur(8px);
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 46px;
     }
-    .brand{display:flex;align-items:center;gap:10px;}
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 6px rgba(26,190,255,.12);}
-    .brand h1{font-size:14px;margin:0;font-weight:700;letter-spacing:.3px}
-    .brand p{margin:2px 0 0;font-size:12px;color:var(--muted)}
-    .meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 10px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.04);font-size:12px;color:var(--muted)
+
+    /* Header minimal */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
     }
-    .pill b{color:var(--text);font-weight:700}
-    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}
-    @media(max-width:820px){.grid{grid-template-columns:1fr}}
-    .card{
-      border:1px solid var(--line);border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      padding:16px;
-    }
-    .card h2{margin:0 0 10px;font-size:14px;letter-spacing:.2px}
-    .label{font-size:12px;color:var(--muted);margin-bottom:6px}
-    .value{font-size:14px;line-height:1.5}
-    .status{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:12px 12px;border-radius:14px;border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-    }
-    .status-left{display:flex;flex-direction:column;gap:2px}
-    .status-name{font-size:13px;color:var(--muted)}
-    .status-value{font-size:16px;font-weight:800}
+    .brand{ display:flex; align-items:center; gap:14px; min-width:0; }
+    .brand img{ height:34px; width:auto; display:block; }
+    .meta .title{ margin:0; font-weight:700; font-size:15px; }
+    .meta .sub{ margin:3px 0 0; font-size:12px; color: var(--muted); }
+
     .badge{
-      font-size:12px;font-weight:700;
-      padding:6px 10px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(26,190,255,.14);color:var(--text)
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #FAFAF9;
+      font-size: 12px;
+      color: var(--text);
+      white-space: nowrap;
     }
-    .section{margin-top:14px}
-    .box{
-      border:1px solid var(--line);border-radius:14px;
-      padding:12px;background:rgba(255,255,255,.03)
+    .dot{
+      width: 8px; height: 8px; border-radius: 99px;
+      background: var(--gold);
     }
+
+    /* Title block */
+    .hero{
+      margin-top: 18px;
+      padding: 2px 2px 0;
+    }
+    .hero h1{
+      margin: 0 0 6px;
+      font-size: 24px;
+      letter-spacing: .2px;
+    }
+    .hero p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .line{
+      margin-top: 12px;
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--gold), rgba(176,138,43,0));
+      border-radius: 99px;
+    }
+
+    /* Layout */
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+    }
+    @media (max-width: 880px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+
+    .kv{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap: 10px 12px;
+      font-size: 13px;
+      align-items:start;
+    }
+    .k{ color: var(--muted); }
+    .v{ font-weight: 600; color: var(--text); }
+
+    /* Big update */
+    .bigUpdate{
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #FBFBFA;
+    }
+    .bigUpdate .label{
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .bigUpdate .text{
+      font-size: 18px;
+      line-height: 1.35;
+      margin: 0;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .note{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .note .label{
+      display:block;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 12px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
     .footer{
-      margin-top:14px;font-size:12px;color:var(--muted);
-      border-top:1px solid var(--line);padding-top:14px
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .divider{height:1px;background:var(--line);margin:12px 0}
+    .footer a{ color: var(--gold); text-decoration: none; }
+    .footer a:hover{ text-decoration: underline; }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <div class="topbar">
+
+    <div class="top">
       <div class="brand">
-        <div class="dot"></div>
-        <div>
-          <h1>Actualización de Caso</h1>
-          <p>Resumen de estado y próximos pasos</p>
+        <img src="https://sdabogados.com.co/wp-content/uploads/2020/09/logo-sd-abogados-laborales-342x66.webp" alt="SDA" />
+        <div class="meta">
+          <p class="title">Actualización de caso (solo lectura)</p>
+          <p class="sub">Resumen informativo del estado del proceso</p>
         </div>
       </div>
-      <div class="meta">
-        <div class="pill">Caso: <b>LAB-001</b></div>
-        <div class="pill">Última actualización: <b>Actualizacion y y estado de prueba </b></div>
-      </div>
+
+      <div class="badge"><span class="dot"></span> Estado: <b>en tramite</b></div>
+    </div>
+
+    <div class="hero">
+      <h1>Caso: <span style="color:var(--gold)">LAB-001</span></h1>
+      <p>Cliente: <b>sergio Suarez</b></p>
+      <div class="line"></div>
     </div>
 
     <div class="grid">
+      <!-- Columna principal -->
       <div class="card">
-        <h2>Cliente</h2>
-        <div class="label">Nombre</div>
-        <div class="value"><b>sergio Suarez</b></div>
+        <h2>Actualización</h2>
 
-        <div class="divider"></div>
-
-        <div class="status">
-          <div class="status-left">
-            <div class="status-name">Estado actual</div>
-            <div class="status-value">en tramite</div>
-          </div>
-          <div class="badge">Actual</div>
+        <div class="bigUpdate">
+          <p class="label">Última actualización</p>
+          <p class="text">Actualizacion y y estado de prueba </p>
         </div>
 
-        <div class="section">
-          <h2>Notas / Contexto</h2>
-          <div class="box">
-            <div class="value">Seguimiento activo</div>
-          </div>
+        <div class="note">
+          <span class="label">Notas</span>
+          Seguimiento activo
         </div>
       </div>
 
+      <!-- Columna lateral -->
       <div class="card">
-        <h2>Próximos pasos</h2>
-        <div class="label">Acciones recomendadas / tiempos</div>
-        <div class="box">
-          <div class="value">—</div>
+        <h2>Contacto</h2>
+        <div class="kv">
+          <div class="k">Correo</div>
+          <div class="v">contacto@sdabogados.com.co</div>
         </div>
 
-        <div class="section">
-          <h2>Información</h2>
-          <div class="box">
-            <div class="value">
-              Este enlace es informativo. Si necesitas adjuntar documentos o hacer una consulta, responde al correo del despacho.
-            </div>
-          </div>
-        </div>
-
-        <div class="footer">
-          Generado automáticamente para el seguimiento del caso.
+        <div class="note" style="margin-top:12px">
+          <span class="label">Importante</span>
+          Esta página es informativa. Si debes enviar documentos o ampliar información, utiliza el canal oficial del despacho.
         </div>
       </div>
     </div>
+
+    <div class="footer">
+      <div>© 2026 — Seguimiento de caso</div>
+      <div><a href="https://sdabogados.com.co/" target="_blank" rel="noopener">sdabogados.com.co</a></div>
+    </div>
+
   </div>
 </body>
 </html>
