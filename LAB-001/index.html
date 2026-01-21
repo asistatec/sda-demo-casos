@@ -1,147 +1,150 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>LAB-001 · Estado del caso</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estado del caso | SDA</title>
   <style>
     :root{
       --bg:#0B1220;
-      --card:#0F1A2F;
-      --card2:#0C1629;
-      --text:#E6ECF5;
-      --muted:#9AA6B2;
-      --line:rgba(255,255,255,.10);
-      --accent:#1ABEFF;
-      --ok:#22C55E;
-      --warn:#F59E0B;
-      --bad:#EF4444;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.08);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --muted2:rgba(255,255,255,.55);
+      --border:rgba(255,255,255,.12);
+      --gold:#B08A2B;
+      --gold2:#D6B15A;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
       --radius:16px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(900px 500px at 15% 0%, rgba(26,190,255,.15), transparent 60%),
-                  radial-gradient(900px 500px at 85% 10%, rgba(26,190,138,.12), transparent 55%),
-                  var(--bg);
+      font-family:var(--font);
       color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(176,138,43,.22), transparent 55%),
+        radial-gradient(1000px 500px at 85% 0%, rgba(80,140,255,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg) 0%, #070C15 100%);
     }
-    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px;}
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      backdrop-filter: blur(8px);
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 46px}
+    .top{
+      display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      padding:14px 16px;border:1px solid var(--border);border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
     }
-    .brand{display:flex;align-items:center;gap:10px;}
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 6px rgba(26,190,255,.12);}
-    .brand h1{font-size:14px;margin:0;font-weight:700;letter-spacing:.3px}
-    .brand p{margin:2px 0 0;font-size:12px;color:var(--muted)}
-    .meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .brand img{height:34px;width:auto;display:block}
+    .meta .title{margin:0;font-weight:700;font-size:15px}
+    .meta .sub{margin:3px 0 0;font-size:12px;color:var(--muted)}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
-      padding:7px 10px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.04);font-size:12px;color:var(--muted)
+      padding:8px 12px;border-radius:999px;border:1px solid var(--border);
+      background:rgba(0,0,0,.18);color:var(--muted);font-size:12px;white-space:nowrap;
     }
-    .pill b{color:var(--text);font-weight:700}
-    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}
-    @media(max-width:820px){.grid{grid-template-columns:1fr}}
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--gold);box-shadow:0 0 0 3px rgba(176,138,43,.18)}
+    .hero{margin-top:18px}
+    .hero h1{margin:0 0 6px;font-size:24px}
+    .hero p{margin:0;color:var(--muted);font-size:14px}
+    .goldline{margin-top:14px;height:2px;width:100%;
+      background:linear-gradient(90deg, var(--gold), rgba(176,138,43,0));border-radius:99px}
+    .grid{margin-top:16px;display:grid;grid-template-columns:1.25fr .75fr;gap:14px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr}}
     .card{
-      border:1px solid var(--line);border-radius:var(--radius);
+      border:1px solid var(--border);border-radius:var(--radius);
+      background:linear-gradient(180deg, var(--card), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);overflow:hidden;
+    }
+    .hd{
+      padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      padding:16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
-    .card h2{margin:0 0 10px;font-size:14px;letter-spacing:.2px}
-    .label{font-size:12px;color:var(--muted);margin-bottom:6px}
-    .value{font-size:14px;line-height:1.5}
-    .status{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:12px 12px;border-radius:14px;border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-    }
-    .status-left{display:flex;flex-direction:column;gap:2px}
-    .status-name{font-size:13px;color:var(--muted)}
-    .status-value{font-size:16px;font-weight:800}
+    .hd h2{margin:0;font-size:14px;color:rgba(255,255,255,.88)}
+    .mini{margin-top:4px;font-size:12px;color:var(--muted2)}
+    .bd{padding:14px 16px 16px}
+    .kv{display:grid;grid-template-columns:140px 1fr;gap:10px 12px;font-size:13px}
+    .k{color:var(--muted2)}
+    .v{color:var(--text);font-weight:600}
     .badge{
-      font-size:12px;font-weight:700;
-      padding:6px 10px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(26,190,255,.14);color:var(--text)
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.16);font-size:12px;color:rgba(255,255,255,.88)
     }
-    .section{margin-top:14px}
-    .box{
-      border:1px solid var(--line);border-radius:14px;
-      padding:12px;background:rgba(255,255,255,.03)
+    .badge .b{width:8px;height:8px;border-radius:99px;background:var(--gold2);box-shadow:0 0 0 3px rgba(214,177,90,.16)}
+    .note{
+      margin-top:10px;padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);color:var(--muted);font-size:13px;line-height:1.45;
     }
-    .footer{
-      margin-top:14px;font-size:12px;color:var(--muted);
-      border-top:1px solid var(--line);padding-top:14px
-    }
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .divider{height:1px;background:var(--line);margin:12px 0}
+    .footer{margin-top:16px;color:var(--muted2);font-size:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .footer a{color:var(--gold2);text-decoration:none}
+    .footer a:hover{text-decoration:underline}
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <div class="topbar">
+    <div class="top">
       <div class="brand">
-        <div class="dot"></div>
-        <div>
-          <h1>Actualización de Caso</h1>
-          <p>Resumen de estado y próximos pasos</p>
+        <img src="https://sdabogados.com.co/wp-content/uploads/2020/09/logo-sd-abogados-laborales-342x66.webp" alt="SDA" />
+        <div class="meta">
+          <p class="title">Portal de actualización de caso</p>
+          <p class="sub">Información de seguimiento (solo lectura)</p>
         </div>
       </div>
-      <div class="meta">
-        <div class="pill">Caso: <b>LAB-001</b></div>
-        <div class="pill">Última actualización: <b>estamos a la espera y prueba de que todo se actualice correctamente </b></div>
-      </div>
+      <div class="pill"><span class="dot"></span> Actualizado: <b>estamos a la espera y prueba de que todo se actualice correctamente </b></div>
+    </div>
+
+    <div class="hero">
+      <h1>Estado del caso: <span style="color:var(--gold2)">LAB-001</span></h1>
+      <p>Cliente: <b>Laura rojas </b></p>
+      <div class="goldline"></div>
     </div>
 
     <div class="grid">
       <div class="card">
-        <h2>Cliente</h2>
-        <div class="label">Nombre</div>
-        <div class="value"><b>Laura rojas </b></div>
-
-        <div class="divider"></div>
-
-        <div class="status">
-          <div class="status-left">
-            <div class="status-name">Estado actual</div>
-            <div class="status-value">Audiencia programada</div>
+        <div class="hd">
+          <div>
+            <h2>Resumen</h2>
+            <div class="mini">Estado y notas principales</div>
           </div>
-          <div class="badge">Actual</div>
+          <div class="badge"><span class="b"></span>Audiencia programada</div>
         </div>
-
-        <div class="section">
-          <h2>Notas / Contexto</h2>
-          <div class="box">
-            <div class="value">Pendiente de documentos</div>
+        <div class="bd">
+          <div class="kv">
+            <div class="k">Estado</div><div class="v">Audiencia programada</div>
+            <div class="k">Caso</div><div class="v">LAB-001</div>
+            <div class="k">Cliente</div><div class="v">Laura rojas </div>
           </div>
+
+          <div class="note"><b>Notas:</b><br/>Pendiente de documentos</div>
+          <div class="note"><b>Próximos pasos:</b><br/>—</div>
+          <div class="note"><b>Tiempo estimado:</b><br/>—</div>
         </div>
       </div>
 
       <div class="card">
-        <h2>Próximos pasos</h2>
-        <div class="label">Acciones recomendadas / tiempos</div>
-        <div class="box">
-          <div class="value">—</div>
-        </div>
-
-        <div class="section">
-          <h2>Información</h2>
-          <div class="box">
-            <div class="value">
-              Este enlace es informativo. Si necesitas adjuntar documentos o hacer una consulta, responde al correo del despacho.
-            </div>
+        <div class="hd">
+          <div>
+            <h2>Contacto</h2>
+            <div class="mini">Canal sugerido</div>
           </div>
         </div>
-
-        <div class="footer">
-          Generado automáticamente para el seguimiento del caso.
+        <div class="bd">
+          <div class="note"><b>Correo:</b><br/>contacto@sdabogados.com.co</div>
+          <div class="note">
+            Esta página es informativa. Si debes enviar documentos o ampliar información, utiliza el canal oficial del despacho.
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="footer">
+      <div>© 2026 — Seguimiento de caso</div>
+      <div><a href="https://sdabogados.com.co/" target="_blank" rel="noopener">sdabogados.com.co</a></div>
     </div>
   </div>
 </body>
