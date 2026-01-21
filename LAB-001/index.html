@@ -6,12 +6,12 @@
   <title>Estado del caso | SDA</title>
   <style>
     :root{
-      --bg: #F6F5F2;          /* beige/gris claro */
-      --surface: #FFFFFF;     /* tarjetas */
-      --text: #111827;        /* casi negro */
-      --muted: #6B7280;       /* gris */
-      --border: #E5E7EB;      /* borde suave */
-      --gold: #B08A2B;        /* acento dorado */
+      --bg: #F6F5F2;
+      --surface: #FFFFFF;
+      --text: #111827;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --gold: #B08A2B;
       --radius: 14px;
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
     }
@@ -28,7 +28,7 @@
       padding: 28px 18px 46px;
     }
 
-    /* Header minimal */
+    /* Header */
     .top{
       display:flex;
       align-items:center;
@@ -60,7 +60,7 @@
       background: var(--gold);
     }
 
-    /* Title block */
+    /* Title */
     .hero{
       margin-top: 18px;
       padding: 2px 2px 0;
@@ -173,66 +173,152 @@
     }
     .footer a{ color: var(--gold); text-decoration: none; }
     .footer a:hover{ text-decoration: underline; }
+
+    /* ====== Lock overlay (demo) ====== */
+    .locked #content { filter: blur(6px); pointer-events: none; user-select: none; }
+    #lockOverlay{
+      position: fixed; inset: 0; display:flex; align-items:center; justify-content:center;
+      background: rgba(17,24,39,.55); padding: 18px; z-index: 9999;
+    }
+    .lockCard{
+      width: min(520px, 100%);
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .lockCard h3{ margin:0 0 6px; font-size:16px; color:#111827; }
+    .lockCard p{ margin:0 0 12px; color:#6B7280; font-size:13px; line-height:1.45; }
+    .lockRow{ display:flex; gap:10px; margin-top: 10px; }
+    .lockRow input{
+      flex:1; padding: 11px 12px; border-radius: 12px; border: 1px solid #E5E7EB;
+      font-size: 14px; outline:none;
+    }
+    .lockRow button{
+      padding: 11px 14px; border-radius: 12px; border: 1px solid #E5E7EB;
+      background: #B08A2B; color:#fff; font-weight: 700; cursor:pointer;
+    }
+    .lockRow button:hover{ opacity:.92; }
+    .lockError{ margin-top:10px; color:#B91C1C; font-size:12px; display:none; }
+    .lockHint{ margin-top:12px; color:#6B7280; font-size:12px; }
   </style>
 </head>
 
-<body>
-  <div class="wrap">
+<body class="locked">
+  <div id="lockOverlay"></div>
 
-    <div class="top">
-      <div class="brand">
-        <img src="https://sdabogados.com.co/wp-content/uploads/2020/09/logo-sd-abogados-laborales-342x66.webp" alt="SDA" />
-        <div class="meta">
-          <p class="title">Actualización de caso (solo lectura)</p>
-          <p class="sub">Resumen informativo del estado del proceso</p>
+  <div id="content">
+    <div class="wrap">
+
+      <div class="top">
+        <div class="brand">
+          <img src="https://sdabogados.com.co/wp-content/uploads/2020/09/logo-sd-abogados-laborales-342x66.webp" alt="SDA" />
+          <div class="meta">
+            <p class="title">Actualización de caso (solo lectura)</p>
+            <p class="sub">Resumen informativo del estado del proceso</p>
+          </div>
+        </div>
+
+        <div class="badge"><span class="dot"></span> Estado: <b>en tramite</b></div>
+      </div>
+
+      <div class="hero">
+        <h1>Caso: <span style="color:var(--gold)">LAB-001</span></h1>
+        <p>Cliente: <b>sergio Suarez</b></p>
+        <div class="line"></div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Actualización</h2>
+
+          <div class="bigUpdate">
+            <p class="label">Última actualización</p>
+            <p class="text">Actualizacion y y estado de prueba </p>
+          </div>
+
+          <div class="note">
+            <span class="label">Notas</span>
+            Seguimiento activo
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Contacto</h2>
+          <div class="kv">
+            <div class="k">Correo</div>
+            <div class="v">contacto@sdabogados.com.co</div>
+          </div>
+
+          <div class="note" style="margin-top:12px">
+            <span class="label">Importante</span>
+            Esta página es informativa. Si debes enviar documentos o ampliar información, utiliza el canal oficial del despacho.
+          </div>
         </div>
       </div>
 
-      <div class="badge"><span class="dot"></span> Estado: <b>en tramite</b></div>
-    </div>
-
-    <div class="hero">
-      <h1>Caso: <span style="color:var(--gold)">LAB-001</span></h1>
-      <p>Cliente: <b>sergio Suarez</b></p>
-      <div class="line"></div>
-    </div>
-
-    <div class="grid">
-      <!-- Columna principal -->
-      <div class="card">
-        <h2>Actualización</h2>
-
-        <div class="bigUpdate">
-          <p class="label">Última actualización</p>
-          <p class="text">Actualizacion y y estado de prueba </p>
-        </div>
-
-        <div class="note">
-          <span class="label">Notas</span>
-          Seguimiento activo
-        </div>
+      <div class="footer">
+        <div>© 2026 — Seguimiento de caso</div>
+        <div><a href="https://sdabogados.com.co/" target="_blank" rel="noopener">sdabogados.com.co</a></div>
       </div>
 
-      <!-- Columna lateral -->
-      <div class="card">
-        <h2>Contacto</h2>
-        <div class="kv">
-          <div class="k">Correo</div>
-          <div class="v">contacto@sdabogados.com.co</div>
-        </div>
-
-        <div class="note" style="margin-top:12px">
-          <span class="label">Importante</span>
-          Esta página es informativa. Si debes enviar documentos o ampliar información, utiliza el canal oficial del despacho.
-        </div>
-      </div>
     </div>
-
-    <div class="footer">
-      <div>© 2026 — Seguimiento de caso</div>
-      <div><a href="https://sdabogados.com.co/" target="_blank" rel="noopener">sdabogados.com.co</a></div>
-    </div>
-
   </div>
+
+  <script>
+    (function(){
+      // Valores inyectados por n8n (demo)
+      const expected = "12345678";
+      const caseId = "LAB-001";
+
+      const overlay = document.getElementById("lockOverlay");
+      const body = document.body;
+
+      // Si no hay cédula configurada, NO bloquea
+      if (!expected) {
+        body.classList.remove("locked");
+        overlay.style.display = "none";
+        return;
+      }
+
+      // Mantener desbloqueo en este navegador (solo demo)
+      const key = "sda_unlock_" + caseId;
+      if (localStorage.getItem(key) === "1") {
+        body.classList.remove("locked");
+        overlay.style.display = "none";
+        return;
+      }
+
+      overlay.innerHTML = `
+        <div class="lockCard">
+          <h3>Acceso a actualización del caso</h3>
+          <p>Para ver el estado del caso, ingresa la cédula del titular.</p>
+          <div class="lockRow">
+            <input id="idInput" type="password" inputmode="numeric" placeholder="Cédula" />
+            <button id="btnUnlock">Ver</button>
+          </div>
+          <div id="lockErr" class="lockError">Cédula incorrecta. Intenta nuevamente.</div>
+          <div class="lockHint">Demo: bloqueo informativo (no es seguridad real).</div>
+        </div>
+      `;
+
+      function unlock(){
+        const val = (document.getElementById("idInput").value || "").trim();
+        if (val === expected) {
+          localStorage.setItem(key, "1");
+          body.classList.remove("locked");
+          overlay.style.display = "none";
+        } else {
+          document.getElementById("lockErr").style.display = "block";
+        }
+      }
+
+      document.getElementById("btnUnlock").addEventListener("click", unlock);
+      document.getElementById("idInput").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") unlock();
+      });
+    })();
+  </script>
 </body>
 </html>
